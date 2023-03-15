@@ -1,0 +1,5 @@
+﻿@using Microsoft.AspNetCore.Http;
+<h3>Una página cualquiera</h3>
+Bienvenido @Context.Session.GetString("usuario")
+<br>
+<a asp-controller="CuentaConSesion" asp-action="Logout">Cerrar sesión</a>

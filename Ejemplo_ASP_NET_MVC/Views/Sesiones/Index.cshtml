@@ -1,0 +1,45 @@
+﻿@using Microsoft.AspNetCore.Http; <!--para GetInt32 de sesión-->
+@using Ejemplo_ASP_NET_MVC.Models;<!--Para manejar objetos Producto-->
+@using Ejemplo_ASP_NET_MVC.Herramientas;<!--Para manejar la herramienta conversora-->
+
+<h3>Mostrando valores de sesión</h3>
+<h4>Valores primitivos</h4>
+Edad: @Context.Session.GetInt32("edad")
+<br>
+Usuario: @Context.Session.GetInt32("usuario")
+<br>
+<h4>Un producto</h4>
+@{
+    Producto producto = ConversorParaSesiones.JsonAobjeto<Producto>(Context.Session, "producto");
+}
+Id: @producto.Id <br>
+Nombre: @producto.Nombre<br>
+Foto: @producto.Foto<br>
+Precio: @producto.Precio
+<br>
+Cantidad: @producto.Cantidad
+<br>
+
+<h4>Varios productos</h4>
+@{
+    List<Producto> productos = ConversorParaSesiones.JsonAobjeto<List<Producto>>(Context.Session, "productos");
+}
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Foto</th>
+        <th>Precio</th>
+        <th>Cantidad</th>
+    </tr>
+    @foreach (var p in productos)
+    {
+        <tr>
+        <td>@p.Id</td>
+        <td>@p.Nombre</td>
+        <td>@p.Foto</td>
+        <td>@p.Precio</td>
+        <td>@p.Cantidad</td>
+        </tr>
+    }
+</table>
